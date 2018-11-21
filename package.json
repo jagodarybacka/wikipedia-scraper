@@ -1,0 +1,22 @@
+{
+  "name": "ptx-wikipedia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jagodarybacka/wikipedia-scraper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jagodarybacka/wikipedia-scraper/issues"
+  },
+  "homepage": "https://github.com/jagodarybacka/wikipedia-scraper#readme",
+  "dependencies": {
+    "website-scraper": "^3.4.0"
+  }
+}
