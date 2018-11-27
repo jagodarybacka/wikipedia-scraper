@@ -18,6 +18,7 @@
   "homepage": "https://github.com/jagodarybacka/wikipedia-scraper#readme",
   "dependencies": {
     "jsdom": "^13.0.0",
+    "readdirp": "^2.2.1",
     "website-scraper": "^3.4.0"
   }
 }

@@ -6,6 +6,7 @@ const INIT_CATEGORY = 'https://pl.wikipedia.org/wiki/Kategoria:Staro%C5%BCytni_m
 const DEST_DIR = './wiki'
 
 function scrapeWebsite(url, destDir) {
+  console.log('Scraping: ', url)
   const options = {
     urls: [url],
     directory: destDir,
@@ -21,15 +22,10 @@ function scrapeWebsite(url, destDir) {
 function getPagesLinksFromCategory(destDir, title='index.html') {
   return JSDOM.fromFile(`${destDir}/${title}`)
     .then(dom => {
-      let nodeList = dom.window.document.querySelectorAll('.mw-category-group')
-      let linksList = Array.prototype.map.call(nodeList, (node) => ({
-        link: node.querySelector('a').href.replace(/file:\/\/\//, WIKI),
-        title: node.querySelector('a').title
-      }))
-
-      if (!linksList.length) {
-        let pages = dom.window.document.querySelector('#mw-pages').querySelectorAll('a')
-        linksList = Array.prototype.map.call(pages, (node) => ({
+      let pages = dom.window.document.querySelector('#mw-pages');
+      if (pages) {
+        let links = pages.querySelectorAll('a')
+        linksList = Array.prototype.map.call(links, (node) => ({
           link: node.href.replace(/file:\/\/\//, WIKI),
           title: node.title
         }))
@@ -52,7 +48,6 @@ function getCategoriesLinksFromCategory(destDir) {
 }
 
 function scrapeCategory(category, destDir) {
-  console.log(category)
   return scrapeWebsite(category, destDir)
     .then(async () => {
       const pages =  await getPagesLinksFromCategory(destDir);
@@ -63,7 +58,6 @@ function scrapeCategory(category, destDir) {
       }
     })
     .then(({pages, categories}) => {
-      console.log(pages)
       pages && pages.forEach(({link, title}) => scrapeWebsite(link, `${destDir}/pages/${title}`))
       categories && categories.forEach(({link, title}) => scrapeCategory(link, `${destDir}/categories/${title}`))
     })
@@ -74,5 +68,6 @@ function scrapeCategory(category, destDir) {
 }
 
 (async () => {
-  scrapeCategory(INIT_CATEGORY, DEST_DIR);
+  const categoryLink = process.argv[2] || INIT_CATEGORY
+  scrapeCategory(categoryLink, DEST_DIR)
 })()
