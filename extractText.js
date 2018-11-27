@@ -18,18 +18,18 @@ function getTextFromHtml(destDir) {
     })
 }
 
-function parse() {
+function extract() {
   readdirp({
     root: ROOT_DIR,
     fileFilter: (file) => file.path.split('/').slice(-3, -2)[0] === 'pages'
   })
   .on('data', (entry) => {
+    console.log('Extracting text from: ', entry.parentDir)
     const path = `${entry.fullParentDir}`
-    console.log(path)
     getTextFromHtml(path)
   })
 }
 
 (async () => {
-  parse()
+  extract()
 })()

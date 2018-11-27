@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 rm -rf ./wiki
-node ./index.js $1
+node ./scrapeText.js $1
 echo 'Scrapping done'
-node ./parseText.js
+node ./extractText.js
+echo 'Extracting done'
+find ./wiki -name '*.html' -type f -delete
