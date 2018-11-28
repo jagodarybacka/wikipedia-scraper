@@ -5,3 +5,5 @@ echo 'Scrapping done'
 node ./extractText.js
 echo 'Extracting done'
 find ./wiki -name '*.html' -type f -delete
+node ./parseText.js
+echo 'Parsing done'
