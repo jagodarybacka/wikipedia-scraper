@@ -1,9 +1,16 @@
-#!/usr/bin/env bash
+#!/bin/bash
+var=$1
+if [[ $1 = '-i' ]]; then
+  var=$2
+fi
 rm -rf ./wiki
-node ./scrapeText.js $1
+node ./scrapeText.js $var
 echo 'Scrapping done'
 node ./extractText.js
 echo 'Extracting done'
 find ./wiki -name '*.html' -type f -delete
 node ./parseText.js
 echo 'Parsing done'
+if [[ $1 = '-i' ]]; then
+  node ./cli.js
+fi
