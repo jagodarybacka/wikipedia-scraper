@@ -23,6 +23,7 @@ function getPagesLinksFromCategory(destDir, title='index.html') {
   return JSDOM.fromFile(`${destDir}/${title}`)
     .then(dom => {
       let pages = dom.window.document.querySelector('#mw-pages');
+      let linksList = [];
       if (pages) {
         let links = pages.querySelectorAll('a')
         linksList = Array.prototype.map.call(links, (node) => ({

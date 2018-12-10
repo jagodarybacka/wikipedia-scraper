@@ -7,13 +7,12 @@ const ROOT_DIR = './wiki'
 function getTextFromHtml(destDir) {
   return JSDOM.fromFile(`${destDir}/index.html`)
     .then(dom => {
-      const content = dom.window.document.querySelector('#content');
-      const heading = content.querySelector('#firstHeading');
-      const paragraphs = content.querySelectorAll('p');
-
-      const headingText = heading.innerHTML;
-      const paragraphsText = Array.prototype.map.call(paragraphs, (a) => a.innerHTML).join(' ')
-      const text = `${headingText} ${paragraphsText}`
+      debugger;
+      const content = dom.window.document
+        .querySelector('#content')
+        .querySelectorAll('h1, h2, p, li');
+      const textArray =  Array.prototype.map.call(content, (node) => node.innerHTML)
+      const text = textArray.join(' ')
       fs.writeFileSync(`${destDir}/index.txt`, text)
     })
 }

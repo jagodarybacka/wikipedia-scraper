@@ -6,7 +6,11 @@ const ROOT_DIR = './wiki'
 
 function parseHTML(destDir) {
   fs.readFile(`${destDir}/index.txt`, 'utf8', (err, data) => {
-    data = data.replace(/<[^>]*>/g, '');
+    data = data.replace(/<\\li/, '\n')
+    data = data.replace(/<[^>]*>/g, ' ');
+    data = data.replace(/\s\s+/g, '\n')
+    data = data.replace(/\[S+\]/, '')
+    data = data.replace(/{S+}/, '')
     fs.writeFileSync(`${destDir}/index.txt`, data)
   })
 }
