@@ -12,7 +12,7 @@ function getTextFromHtml(destDir) {
         .querySelector('#content')
         .querySelectorAll('h1, h2, p, li');
       const textArray =  Array.prototype.map.call(content, (node) => node.innerHTML)
-      const text = textArray.join(' ')
+      const text = textArray.join(':====:')
       fs.writeFileSync(`${destDir}/index.txt`, text)
     })
 }
