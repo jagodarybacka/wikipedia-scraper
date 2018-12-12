@@ -1,4 +1,14 @@
 #!/bin/bash
+
+#   Autor: Jagoda Rybacka
+#   Zadanie 4
+#   Program, który wypompowuje "ładny" tekst z Wikipedii na określony temat.
+# - Możliwe tematy to kategorie wikipedii.
+# - Program umożliwia przeglądanie drzewa kategorii.
+# - Wypompowuje tekst ze stron należących do zadanej kategorii i wszystkich jej podkategorii.
+#
+#  Instrukcja obsługi: plik README.md
+
 var=$1
 if [[ $1 = '-i' ]]; then
   var=$2
