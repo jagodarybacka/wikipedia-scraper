@@ -1,4 +1,6 @@
-# Extract articles from Wikipedia category
+# Wikipedia Scraper - extract articles from Wikipedia category
+
+University project. Made with Node.js
 
 ## Install app dependencies
 
